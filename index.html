@@ -1381,7 +1381,7 @@
             </div>
             <div class="about-content">
                 <p class="about-intro">
-                    I'm a high school student at Mountain House High School driven by an insatiable curiosity about 
+                    I'm a high school student at Tracy High School driven by an insatiable curiosity about 
                     the human brain and its potential intersection with technology. My journey into neuroscience 
                     began not in a classroom, but from a simple question: what makes us who we are?
                 </p>
@@ -1826,6 +1826,17 @@
             <p style="color: var(--color-text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">
                 Aspiring to make a difference in neuroscience and help those affected by neurological conditions.
             </p>
+            <button id="adminLoginLink" style="
+                background: none;
+                border: none;
+                color: var(--color-text-muted);
+                font-size: 0.75rem;
+                margin-top: 1rem;
+                cursor: pointer;
+                opacity: 0.3;
+                transition: opacity 0.2s ease;
+                padding: 0.25rem 0.5rem;
+            " onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='0.3'">Admin</button>
         </div>
     </footer>
 
@@ -1974,6 +1985,21 @@
             galleryUploadSection.style.display = 'block';
         }
 
+        // Admin link in footer - always visible
+        const adminLoginLink = document.getElementById('adminLoginLink');
+        
+        adminLoginLink.addEventListener('click', () => {
+            if (supabase.isAuthenticated()) {
+                // Open admin sidebar in list view
+                showBlogList();
+                adminSidebar.classList.add('open');
+                adminSidebarOverlay.classList.add('show');
+            } else {
+                // Show login modal
+                loginModalOverlay.classList.add('show');
+            }
+        });
+        
         // Floating admin button - opens login or sidebar
         floatingAdminBtn.addEventListener('click', () => {
             if (supabase.isAuthenticated()) {
