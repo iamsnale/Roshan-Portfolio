@@ -1,0 +1,2609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roshan Gowthaman | Aspiring Neuroscience Researcher</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            /* Light mode (default) */
+            --color-bg-primary: #ffffff;
+            --color-bg-secondary: #f8fafc;
+            --color-bg-card: #ffffff;
+            --color-bg-hover: #f1f5f9;
+            --color-text-primary: #0f172a;
+            --color-text-secondary: #475569;
+            --color-text-muted: #94a3b8;
+            --color-accent: #00d4aa;
+            --color-accent-hover: #00b894;
+            --color-border: #e2e8f0;
+            --color-border-subtle: #f1f5f9;
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --max-width: 1200px;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Dark mode */
+        body.dark-mode {
+            --color-bg-primary: #0a0a0a;
+            --color-bg-secondary: #111111;
+            --color-bg-card: #1a1a1a;
+            --color-bg-hover: #222222;
+            --color-text-primary: #ffffff;
+            --color-text-secondary: #a0a0a0;
+            --color-text-muted: #666666;
+            --color-border: #2a2a2a;
+            --color-border-subtle: #1a1a1a;
+        }
+
+        /* Header Navigation - Minimal design */
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-border);
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode header {
+            background-color: rgba(10, 10, 10, 0.8);
+        }
+
+        nav {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--spacing-md) var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-xl);
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-text-primary);
+        }
+
+        .theme-toggle-nav {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+
+        .theme-toggle-nav:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-toggle-nav svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--color-text-secondary);
+            transition: fill 0.2s ease;
+        }
+
+        .theme-toggle-nav:hover svg {
+            fill: var(--color-text-primary);
+        }
+
+        .nav-cta {
+            background-color: var(--color-accent);
+            color: var(--color-bg-primary);
+            padding: 0.625rem 1.25rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            background-color: var(--color-accent-hover);
+            color: var(--color-bg-primary);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section - Minimal & Clean */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            background-color: var(--color-bg-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 212, 170, 0.15) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        body.dark-mode .hero::before {
+            background: radial-gradient(circle, rgba(0, 212, 170, 0.08) 0%, transparent 70%);
+        }
+
+        .hero-content {
+            max-width: 720px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-lg);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 3.75rem;
+            margin-bottom: var(--spacing-md);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            color: var(--color-text-primary);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-md);
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-description {
+            font-size: 1.05rem;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-xl);
+            line-height: 1.7;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: var(--color-bg-primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(0, 212, 170, 0.25);
+        }
+
+        .btn-secondary {
+            background-color: var(--color-bg-card);
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-bg-hover);
+            border-color: var(--color-accent);
+        }
+
+        .btn-admin {
+            background-color: transparent;
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-border);
+            font-size: 0.875rem;
+            padding: 0.625rem 1.25rem;
+        }
+
+        .btn-admin:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        /* Section Styles - Clean & Spacious */
+        section {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--spacing-2xl) var(--spacing-lg);
+        }
+
+        .section-header {
+            max-width: 700px;
+            margin: 0 auto var(--spacing-2xl);
+            text-align: center;
+        }
+
+        .section-eyebrow {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--color-text-primary);
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        /* About Section - Card Grid */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .about-card {
+            background-color: var(--color-bg-card);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border);
+            transition: all 0.2s ease;
+        }
+
+        .about-card:hover {
+            border-color: var(--color-border-subtle);
+            background-color: var(--color-bg-hover);
+        }
+
+        .about-card h3 {
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-md);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .about-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .about-card li {
+            padding: 0.4rem 0;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: start;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .about-card li::before {
+            content: '•';
+            color: var(--color-accent);
+            margin-right: 0.75rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Floating Admin Button - Only visible when authenticated */
+        .floating-admin-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            background-color: var(--color-accent);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 212, 170, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1500;
+            border: none;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .floating-admin-btn.show {
+            display: flex;
+            animation: fadeInScale 0.4s ease forwards;
+        }
+
+        @keyframes fadeInScale {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .floating-admin-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(0, 212, 170, 0.6);
+        }
+
+        .floating-admin-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--color-bg-primary);
+        }
+
+        /* Login Modal Overlay - Vidhai Style */
+        .login-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .login-modal-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .login-modal {
+            background-color: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-2xl);
+            width: 90%;
+            max-width: 420px;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .login-modal-overlay.show .login-modal {
+            transform: scale(1);
+        }
+
+        .login-modal-close {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--color-text-secondary);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            transition: all 0.2s ease;
+        }
+
+        .login-modal-close:hover {
+            background-color: var(--color-bg-hover);
+            color: var(--color-text-primary);
+        }
+
+        .login-modal-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .login-modal-header h3 {
+            font-size: 1.75rem;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-xs);
+            font-weight: 700;
+        }
+
+        .login-modal-header p {
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* Admin Sidebar */
+        .admin-sidebar {
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 450px;
+            height: 100vh;
+            background-color: var(--color-bg-card);
+            border-left: 1px solid var(--color-border);
+            box-shadow: -4px 0 30px rgba(0, 0, 0, 0.15);
+            transition: right 0.3s ease;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .admin-sidebar.open {
+            right: 0;
+        }
+
+        .admin-sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .admin-sidebar-overlay.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .admin-sidebar-header {
+            padding: var(--spacing-xl) var(--spacing-lg);
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background-color: var(--color-bg-card);
+            z-index: 10;
+        }
+
+        .admin-sidebar-header h3 {
+            font-size: 1.25rem;
+            color: var(--color-text-primary);
+            font-weight: 700;
+        }
+
+        .admin-user-info {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-lg);
+            background-color: var(--color-bg-secondary);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .admin-user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-hover));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-bg-primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .admin-user-details {
+            flex: 1;
+        }
+
+        .admin-user-details p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+
+        .admin-user-details .user-email {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+
+        .close-sidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--color-text-secondary);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            transition: all 0.2s ease;
+        }
+
+        .close-sidebar:hover {
+            background-color: var(--color-bg-hover);
+            color: var(--color-text-primary);
+        }
+
+        .admin-sidebar-content {
+            padding: var(--spacing-lg);
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .admin-tab {
+            background: none;
+            border: none;
+            padding: var(--spacing-sm) var(--spacing-md);
+            cursor: pointer;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .admin-tab.active {
+            color: var(--color-accent);
+            border-bottom-color: var(--color-accent);
+        }
+
+        .admin-tab:hover {
+            color: var(--color-text-primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .image-preview-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+
+        .image-preview {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 0.25rem;
+            right: 0.25rem;
+            background-color: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .remove-image:hover {
+            background-color: rgb(220, 38, 38);
+            transform: scale(1.1);
+        }
+
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .upload-btn {
+            border: 2px dashed var(--color-border);
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .upload-btn:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+            background-color: rgba(0, 212, 170, 0.05);
+        }
+
+        .upload-btn-wrapper input[type=file] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* About Content - Organic Layout */
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-intro {
+            font-size: 1.15rem;
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .about-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .about-section h3 {
+            color: var(--color-text-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: -0.01em;
+        }
+
+        .about-section p {
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.05rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.05), rgba(0, 212, 170, 0.02));
+            border-left: 3px solid var(--color-accent);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-sm);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            font-style: italic;
+            color: var(--color-text-secondary);
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+
+        .skill-tag {
+            background-color: var(--color-bg-card);
+            color: var(--color-text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            border: 1px solid var(--color-border);
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        /* Research Interests - Feature Cards */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .interest-card {
+            background-color: var(--color-bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interest-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .interest-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-accent);
+            background-color: var(--color-bg-hover);
+        }
+
+        .interest-card:hover::before {
+            opacity: 1;
+        }
+
+        .interest-card h3 {
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-md);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .interest-card p {
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Blog Section - Modern Card Layout */
+        .blog-admin-toggle {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .admin-panel {
+            background-color: var(--color-bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .admin-header h3 {
+            color: var(--color-text-primary);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .logout-btn {
+            background-color: transparent;
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-border);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+            color: var(--color-text-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            background-color: var(--color-bg-primary);
+        }
+
+        .form-group textarea {
+            min-height: 200px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .auth-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: var(--color-bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+        }
+
+        .auth-container h3 {
+            color: var(--color-text-primary);
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .blog-card {
+            background-color: var(--color-bg-card);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-accent);
+        }
+
+        .blog-card-header {
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .blog-card-header h3 {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-xs);
+            color: var(--color-text-primary);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+        }
+
+        .blog-meta {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .blog-card-body {
+            padding: var(--spacing-lg);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-excerpt {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        .blog-tags {
+            display: flex;
+            gap: var(--spacing-xs);
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text-secondary);
+            padding: 0.375rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            border: 1px solid var(--color-border);
+            font-weight: 500;
+        }
+
+        /* Gallery Section - Masonry Style */
+        .gallery-upload {
+            background-color: var(--color-bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border);
+            margin-bottom: var(--spacing-xl);
+            text-align: center;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-2xl);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .upload-area:hover {
+            border-color: var(--color-accent);
+            background-color: rgba(0, 212, 170, 0.05);
+        }
+
+        .upload-area p {
+            color: var(--color-text-secondary);
+            margin-top: var(--spacing-sm);
+            font-size: 0.95rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            aspect-ratio: 1;
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            border-color: var(--color-accent);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.95), transparent);
+            padding: var(--spacing-md);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-caption {
+            color: var(--color-text-primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Modal - Reading Experience */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background-color: var(--color-bg-card);
+            margin: 4rem auto;
+            padding: var(--spacing-2xl);
+            border-radius: var(--radius-lg);
+            max-width: 800px;
+            position: relative;
+            border: 1px solid var(--color-border);
+        }
+
+        .close {
+            color: var(--color-text-secondary);
+            position: absolute;
+            right: var(--spacing-lg);
+            top: var(--spacing-lg);
+            font-size: 1.75rem;
+            font-weight: normal;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            background-color: var(--color-bg-secondary);
+        }
+
+        .close:hover {
+            color: var(--color-text-primary);
+            background-color: var(--color-bg-hover);
+        }
+
+        .modal-header {
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .modal-body {
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .modal-body h3 {
+            color: var(--color-text-primary);
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .modal-body p {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .modal-body ul {
+            margin: var(--spacing-md) 0;
+            padding-left: 1.5rem;
+        }
+
+        .modal-body li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* Footer - Minimal */
+        footer {
+            background-color: var(--color-bg-secondary);
+            border-top: 1px solid var(--color-border);
+            padding: var(--spacing-2xl) var(--spacing-lg);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .social-links a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: 1.25rem;
+            transition: color 0.2s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            background-color: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+        }
+
+        .social-links a:hover {
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        footer p {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .error-message {
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--spacing-md);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            :root {
+                --spacing-xl: 2rem;
+                --spacing-2xl: 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: var(--spacing-md);
+                font-size: 0.85rem;
+            }
+
+            .blog-grid,
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 2rem 1rem;
+                padding: var(--spacing-lg);
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            section {
+                padding: var(--spacing-xl) var(--spacing-md);
+            }
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: var(--spacing-xl);
+            color: var(--color-text-secondary);
+        }
+
+        .spinner {
+            border: 3px solid var(--color-border);
+            border-top: 3px solid var(--color-accent);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto var(--spacing-md);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#home" class="logo">RG</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li>
+                    <button class="theme-toggle-nav" id="themeToggleNav" title="Toggle dark mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="sunIconNav">
+                            <path d="M12 18c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6zm0-10c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zM13 2h-2v3h2V2zm0 17h-2v3h2v-3zM5 11H2v2h3v-2zm17 0h-3v2h3v-2zM6.3 4.9L4.9 6.3l2.1 2.1 1.4-1.4-2.1-2.1zm11.3 11.3l-1.4 1.4 2.1 2.1 1.4-1.4-2.1-2.1zm-2.1-11.3l-2.1 2.1 1.4 1.4 2.1-2.1-1.4-1.4zM6.3 19.1l2.1-2.1-1.4-1.4-2.1 2.1 1.4 1.4z"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="moonIconNav" style="display: none;">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
+                </li>
+                <li><a href="https://www.linkedin.com/in/roshan-gowthaman-71b324321/" target="_blank" class="nav-cta">LinkedIn</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <span class="hero-badge">High School Researcher</span>
+                <h1>Roshan Gowthaman</h1>
+                <p class="hero-subtitle">Aspiring Neuroscience Researcher & BCI Enthusiast</p>
+                <p class="hero-description">
+                    Exploring the intersection of neuroscience and technology to develop solutions for 
+                    neurodegenerative disorders. Passionate about brain-computer interfaces and committed 
+                    to advancing our understanding of the human brain.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#research" class="btn btn-primary">View Research</a>
+                    <a href="#blog" class="btn btn-secondary">Read Blog</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="section-header">
+                <p class="section-eyebrow">Background</p>
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div class="about-content">
+                <p class="about-intro">
+                    I'm a high school student at Tracy High School driven by an insatiable curiosity about 
+                    the human brain and its potential intersection with technology. My journey into neuroscience 
+                    began not in a classroom, but from a simple question: what makes us who we are?
+                </p>
+
+                <div class="about-section">
+                    <h3>The Academic Journey</h3>
+                    <p>
+                        My academic path has been shaped by a relentless pursuit of understanding the brain. 
+                        From earning an A in Biology Honors to diving deep into AP Psychology and AP Seminar, 
+                        each course has been a stepping stone toward my goal of becoming a neuroscience researcher. 
+                        I've complemented my traditional coursework with a Harvard Online Python course, recognizing 
+                        that modern neuroscience research demands strong computational skills.
+                    </p>
+                    <p>
+                        The turning point came during UC Berkeley's ATDP program, where I studied Cognitive Neuroscience. 
+                        Walking through UCSF's lab facilities and witnessing real scientists at work transformed my 
+                        abstract interest into concrete determination. These weren't just researchers—they were people 
+                        using their knowledge to address real medical questions and help real patients.
+                    </p>
+                </div>
+
+                <div class="highlight-box">
+                    <p>
+                        "Since I was little, I've been drawn to science, not just for the subject, but for what it 
+                        stands for—exploring what is yet to be known."
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h3>Research & Innovation</h3>
+                    <p>
+                        Currently, I'm developing a science fair project on Brain-Computer Interfaces, exploring 
+                        how technology can detect and respond to brain activity. This project represents the 
+                        convergence of my interests: understanding neural signals, implementing machine learning 
+                        algorithms, and creating practical applications that could one day help people with 
+                        neurological conditions.
+                    </p>
+                    <p>
+                        My fascination extends to neurodegenerative disorders like Alzheimer's and Multiple Sclerosis. 
+                        These conditions drastically alter millions of lives, yet countless questions remain about 
+                        their mechanisms and treatments. I'm particularly interested in how stem cell treatments and 
+                        other therapeutic approaches might offer hope to those affected.
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h3>Beyond the Lab</h3>
+                    <p>
+                        Science doesn't exist in isolation for me. As a member of the National Honor Society and 
+                        volunteer at Living Grace Assisted Living, I've learned to communicate complex concepts 
+                        and see firsthand how neurological conditions impact real people and their families. 
+                        My involvement in Speech and Debate has sharpened my ability to articulate scientific 
+                        ideas clearly—a crucial skill for any researcher.
+                    </p>
+                    <p>
+                        When I'm not immersed in research or coursework, I find balance through creative pursuits 
+                        like sketching and baking, and physical activity through swimming. These hobbies remind me 
+                        that the brain we study is also the source of creativity, discipline, and joy.
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h3>Core Competencies</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Neuroscience Research</span>
+                        <span class="skill-tag">Brain-Computer Interfaces</span>
+                        <span class="skill-tag">Python Programming</span>
+                        <span class="skill-tag">Data Analysis</span>
+                        <span class="skill-tag">Scientific Writing</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Cognitive Psychology</span>
+                        <span class="skill-tag">Team Collaboration</span>
+                        <span class="skill-tag">Public Speaking</span>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <p>
+                        My goal is to become a researcher in cognitive neuroscience, focusing on neurodegenerative 
+                        and neurological disorders. I want to go beyond studying science and use that knowledge to 
+                        support those affected by conditions like Alzheimer's through innovative treatments.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Interests -->
+        <section id="research">
+            <div class="section-header">
+                <p class="section-eyebrow">Focus Areas</p>
+                <h2 class="section-title">Research Interests</h2>
+                <p class="section-description">
+                    My research interests span multiple domains of neuroscience, from understanding 
+                    the molecular basis of brain function to developing practical applications in 
+                    brain-computer interfaces.
+                </p>
+            </div>
+            <div class="interests-grid">
+                <div class="interest-card">
+                    <h3>Brain-Computer Interfaces</h3>
+                    <p>
+                        Exploring how technology can detect and respond to brain activity. Currently developing 
+                        a science fair project focusing on optimizing BCIs to detect motor commands and understanding 
+                        how biological systems can interface with technological systems.
+                    </p>
+                </div>
+                <div class="interest-card">
+                    <h3>Neurodegenerative Disorders</h3>
+                    <p>
+                        Deep interest in understanding conditions like Alzheimer's and Multiple Sclerosis. 
+                        Fascinated by how the brain can break down and committed to working toward solutions 
+                        through means like stem cell treatments and other therapeutic approaches.
+                    </p>
+                </div>
+                <div class="interest-card">
+                    <h3>Cognitive Neuroscience</h3>
+                    <p>
+                        Passionate about understanding how the brain drives who we are. Interested in neural 
+                        mechanisms of cognition, consciousness, and how cognitive processes can be studied and 
+                        potentially enhanced or restored in neurological conditions.
+                    </p>
+                </div>
+                <div class="interest-card">
+                    <h3>Molecular Neuroscience</h3>
+                    <p>
+                        Eager to explore the molecular basis of neurological function and dysfunction. 
+                        Interested in learning about neural signaling, synaptic mechanisms, and how molecular 
+                        approaches can contribute to understanding and treating brain disorders.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog">
+            <div class="section-header">
+                <p class="section-eyebrow">Thoughts & Insights</p>
+                <h2 class="section-title">Blog</h2>
+                <p class="section-description">
+                    Sharing my journey in neuroscience research, thoughts on emerging technologies, 
+                    and insights from my academic experiences.
+                </p>
+            </div>
+
+            <!-- Admin Post Form -->
+            <div id="adminPanel" class="admin-panel hidden">
+                <div class="admin-header">
+                    <h3>✍️ Create New Post</h3>
+                    <button id="logoutBtn" class="logout-btn">Sign Out</button>
+                </div>
+                <form id="blogForm">
+                    <div class="form-group">
+                        <label for="blogTitle">Title</label>
+                        <input type="text" id="blogTitle" placeholder="Enter blog post title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="blogExcerpt">Excerpt (Brief Summary)</label>
+                        <textarea id="blogExcerpt" placeholder="Write a brief summary (150-180 characters) that will appear on the blog card..." style="min-height: 80px;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="blogTags">Tags (comma-separated)</label>
+                        <input type="text" id="blogTags" placeholder="e.g., BCI, Neuroscience, Research">
+                    </div>
+                    <div class="form-group">
+                        <label for="blogContent">Content (Supports HTML)</label>
+                        <textarea id="blogContent" placeholder="Write your blog post content here... You can use HTML tags like <h3>, <p>, <ul>, <li>, <strong>, etc." required></textarea>
+                        <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.5rem;">
+                            💡 Tip: Use &lt;h3&gt; for section headings, &lt;p&gt; for paragraphs, &lt;ul&gt; and &lt;li&gt; for bullet points
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="submit" class="btn btn-primary" style="flex: 1;">📤 Publish Post</button>
+                        <button type="button" id="previewBtn" class="btn btn-secondary">👁️ Preview</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="blog-grid" id="blogGrid">
+                <!-- Sample Blog Posts -->
+                <div class="blog-card" data-blog-id="1">
+                    <div class="blog-card-header">
+                        <h3>Understanding Brain-Computer Interfaces</h3>
+                        <p class="blog-meta">March 8, 2026</p>
+                    </div>
+                    <div class="blog-card-body">
+                        <p class="blog-excerpt">
+                            Brain-Computer Interfaces represent one of the most exciting frontiers in neuroscience. 
+                            My science fair project explores how BCIs can be optimized to detect motor commands...
+                        </p>
+                        <div class="blog-tags">
+                            <span class="tag">BCI</span>
+                            <span class="tag">Neuroscience</span>
+                            <span class="tag">Technology</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card" data-blog-id="2">
+                    <div class="blog-card-header">
+                        <h3>My Journey to UCSF Labs</h3>
+                        <p class="blog-meta">February 15, 2026</p>
+                    </div>
+                    <div class="blog-card-body">
+                        <p class="blog-excerpt">
+                            Visiting the lab facilities at UCSF was a transformative experience. Witnessing real 
+                            scientists at work showed me how research can impact real people...
+                        </p>
+                        <div class="blog-tags">
+                            <span class="tag">Experience</span>
+                            <span class="tag">Research</span>
+                            <span class="tag">UCSF</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card" data-blog-id="3">
+                    <div class="blog-card-header">
+                        <h3>Physical AI: The Intelligence That Touches Steel</h3>
+                        <p class="blog-meta">March 1, 2026</p>
+                    </div>
+                    <div class="blog-card-body">
+                        <p class="blog-excerpt">
+                            AI has left the screen. It now bends metal, inspects welds, and rewires production lines. 
+                            The intersection of artificial intelligence and physical robotics is reshaping manufacturing...
+                        </p>
+                        <div class="blog-tags">
+                            <span class="tag">AI</span>
+                            <span class="tag">Technology</span>
+                            <span class="tag">Innovation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery">
+            <div class="section-header">
+                <p class="section-eyebrow">Creative Work</p>
+                <h2 class="section-title">Gallery</h2>
+                <p class="section-description">
+                    A collection of my creative pursuits including sketches, baking projects, 
+                    and other hobbies that complement my scientific interests.
+                </p>
+            </div>
+            
+            <div class="gallery-upload" id="galleryUploadSection">
+                <div class="admin-header" style="padding-bottom: var(--spacing-md); border-bottom: 1px solid var(--color-border); margin-bottom: var(--spacing-md);">
+                    <h3 style="color: var(--color-accent); margin: 0;">📸 Upload Images</h3>
+                    <p style="font-size: 0.9rem; color: var(--color-text-secondary); margin-top: 0.5rem;">
+                        Add photos of your sketches, baking creations, and other creative work
+                    </p>
+                </div>
+                <div class="upload-area" id="uploadArea">
+                    <div style="font-size: 3rem; color: var(--color-accent); margin-bottom: 0.5rem;">📷</div>
+                    <p style="font-weight: 600; color: var(--color-text-primary); margin-bottom: 0.25rem;">Click to upload or drag and drop</p>
+                    <p style="font-size: 0.85rem; color: var(--color-text-muted);">PNG, JPG, GIF up to 10MB</p>
+                </div>
+                <input type="file" id="imageUpload" accept="image/*" multiple style="display: none;">
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Sample Gallery Items -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1569098644584-210bcd375b59?w=500&amp;h=500&amp;fit=crop" alt="Sketch Sample">
+                    <div class="gallery-overlay">
+                        <p class="gallery-caption">Charcoal Sketch - March 2026</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=500&amp;h=500&amp;fit=crop" alt="Baking Sample">
+                    <div class="gallery-overlay">
+                        <p class="gallery-caption">Homemade Sourdough - February 2026</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500&amp;h=500&amp;fit=crop" alt="Portrait Sketch">
+                    <div class="gallery-overlay">
+                        <p class="gallery-caption">Portrait Study - January 2026</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&amp;h=500&amp;fit=crop" alt="Pastries">
+                    <div class="gallery-overlay">
+                        <p class="gallery-caption">French Pastries - March 2026</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Admin Button -->
+    <button class="floating-admin-btn" id="floatingAdminBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+    </button>
+
+    <!-- Login Modal -->
+    <div class="login-modal-overlay" id="loginModalOverlay">
+        <div class="login-modal">
+            <button class="login-modal-close" id="loginModalClose">&times;</button>
+            <div class="login-modal-header">
+                <h3>Admin Login</h3>
+                <p>Sign in to manage content</p>
+            </div>
+            <div id="authError" class="error-message hidden"></div>
+            <form id="authForm">
+                <div class="form-group">
+                    <label for="authEmail">Email</label>
+                    <input type="email" id="authEmail" placeholder="admin@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="authPassword">Password</label>
+                    <input type="password" id="authPassword" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Sidebar Overlay -->
+    <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+    <!-- Admin Sidebar -->
+    <div class="admin-sidebar" id="adminSidebar">
+        <div class="admin-sidebar-header">
+            <h3>Admin Panel</h3>
+            <button class="close-sidebar" id="closeSidebar">&times;</button>
+        </div>
+        
+        <div class="admin-user-info" id="adminUserInfo">
+            <div class="admin-user-avatar" id="userAvatar">A</div>
+            <div class="admin-user-details">
+                <p style="font-weight: 600; color: var(--color-text-primary);">Admin</p>
+                <p class="user-email" id="userEmail">admin@example.com</p>
+            </div>
+            <button id="logoutBtn" class="logout-btn">Sign Out</button>
+        </div>
+
+        <div class="admin-sidebar-content">
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="blog">📝 Blog Post</button>
+                <button class="admin-tab" data-tab="gallery">🖼️ Gallery</button>
+            </div>
+
+            <!-- Blog Tab Content -->
+            <div class="tab-content active" id="blogTab">
+                <div id="blogListView">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+                        <h4 style="color: var(--color-text-primary); margin: 0;">Manage Posts</h4>
+                        <button id="createNewPostBtn" class="btn btn-primary" style="padding: 0.5rem 1rem;">+ New Post</button>
+                    </div>
+                    <div id="adminBlogList" style="display: flex; flex-direction: column; gap: var(--spacing-sm);">
+                        <!-- Blog posts will be listed here -->
+                    </div>
+                </div>
+                
+                <form id="blogForm" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+                        <h4 style="color: var(--color-text-primary); margin: 0;" id="formTitle">Create New Post</h4>
+                        <button type="button" id="cancelEditBtn" class="btn btn-secondary" style="padding: 0.5rem 1rem;">← Back</button>
+                    </div>
+                    
+                    <input type="hidden" id="editingBlogId">
+                    
+                    <div class="form-group">
+                        <label>Import from Word Document</label>
+                        <div class="upload-btn-wrapper">
+                            <div class="upload-btn">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.25rem;">📄</div>
+                                <p style="margin: 0; font-size: 0.85rem;">Upload .docx file</p>
+                            </div>
+                            <input type="file" id="docxUpload" accept=".docx">
+                        </div>
+                        <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.5rem;">
+                            Or fill in the fields manually below
+                        </p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="blogTitle">Title</label>
+                        <input type="text" id="blogTitle" placeholder="Enter blog post title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="blogExcerpt">Excerpt</label>
+                        <textarea id="blogExcerpt" placeholder="Brief summary (150-180 characters)" style="min-height: 80px;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="blogTags">Tags (comma-separated)</label>
+                        <input type="text" id="blogTags" placeholder="BCI, Neuroscience, Research">
+                    </div>
+                    <div class="form-group">
+                        <label for="blogContent">Content</label>
+                        <textarea id="blogContent" placeholder="Write your content... Supports HTML tags" required style="min-height: 250px;"></textarea>
+                    </div>
+                    <div style="display: flex; gap: var(--spacing-sm);">
+                        <button type="submit" class="btn btn-primary" style="flex: 1;" id="submitBlogBtn">Publish</button>
+                        <button type="button" id="previewBtn" class="btn btn-secondary">Preview</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Gallery Tab Content -->
+            <div class="tab-content" id="galleryTab">
+                <div class="form-group">
+                    <label>Upload Images</label>
+                    <div class="upload-btn-wrapper">
+                        <div class="upload-btn">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📷</div>
+                            <p style="margin: 0;">Click or drag images here</p>
+                        </div>
+                        <input type="file" id="galleryImageUpload" accept="image/*" multiple>
+                    </div>
+                </div>
+                <div id="imagePreviewContainer" class="image-preview-container"></div>
+                <div class="form-group" id="captionGroup" style="display: none;">
+                    <label for="imageCaption">Caption for all images</label>
+                    <input type="text" id="imageCaption" placeholder="Enter caption for these images">
+                </div>
+                <button type="button" id="uploadImagesBtn" class="btn btn-primary" style="width: 100%; display: none;">Upload Images</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Modal -->
+    <div id="blogModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <p class="blog-meta" id="modalMeta"></p>
+                <div class="blog-tags" id="modalTags"></div>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p style="color: var(--color-text-secondary);">&copy; 2026 Roshan Gowthaman. All rights reserved.</p>
+            <p style="color: var(--color-text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">
+                Aspiring to make a difference in neuroscience and help those affected by neurological conditions.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // SUPABASE CONFIGURATION
+        // ============================================
+        // Get your credentials from: https://supabase.com/dashboard/project/tzmahxjukihtnxwaqrjd/settings/api
+        const SUPABASE_URL = 'https://tzmahxjukihtnxwaqrjd.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR6bWFoeGp1a2lodG54d2FxcmpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwNjQ0NTYsImV4cCI6MjA4ODY0MDQ1Nn0.2Dv-lb5OENj4U-hhYWc0y-aKeC-BbieNV5KZGpa0CSU';
+
+        // Simple Supabase client implementation
+        class SupabaseClient {
+            constructor(url, key) {
+                this.url = url;
+                this.key = key;
+                this.session = null;
+            }
+
+            async signIn(email, password) {
+                const response = await fetch(`${this.url}/auth/v1/token?grant_type=password`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': this.key
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.msg || 'Authentication failed');
+                }
+
+                const data = await response.json();
+                this.session = data;
+                localStorage.setItem('supabase_session', JSON.stringify(data));
+                return data;
+            }
+
+            async signOut() {
+                this.session = null;
+                localStorage.removeItem('supabase_session');
+            }
+
+            getSession() {
+                if (this.session) return this.session;
+                const stored = localStorage.getItem('supabase_session');
+                if (stored) {
+                    this.session = JSON.parse(stored);
+                    return this.session;
+                }
+                return null;
+            }
+
+            isAuthenticated() {
+                const session = this.getSession();
+                if (!session) return false;
+                // Check if token is expired
+                const expiry = session.expires_at || (session.created_at + session.expires_in);
+                return expiry > Date.now() / 1000;
+            }
+        }
+
+        // Initialize Supabase client
+        const supabase = new SupabaseClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // ============================================
+        // THEME TOGGLE (IN NAVIGATION)
+        // ============================================
+        const themeToggleNav = document.getElementById('themeToggleNav');
+        const sunIconNav = document.getElementById('sunIconNav');
+        const moonIconNav = document.getElementById('moonIconNav');
+
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            sunIconNav.style.display = 'none';
+            moonIconNav.style.display = 'block';
+        }
+
+        themeToggleNav.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                sunIconNav.style.display = 'none';
+                moonIconNav.style.display = 'block';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                sunIconNav.style.display = 'block';
+                moonIconNav.style.display = 'none';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // ============================================
+        // AUTHENTICATION HANDLERS
+        // ============================================
+        const authForm = document.getElementById('authForm');
+        const authError = document.getElementById('authError');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const loginModalOverlay = document.getElementById('loginModalOverlay');
+        const loginModalClose = document.getElementById('loginModalClose');
+        const adminSidebar = document.getElementById('adminSidebar');
+        const adminSidebarOverlay = document.getElementById('adminSidebarOverlay');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const floatingAdminBtn = document.getElementById('floatingAdminBtn');
+        const adminUserInfo = document.getElementById('adminUserInfo');
+        const userEmail = document.getElementById('userEmail');
+        const userAvatar = document.getElementById('userAvatar');
+        const galleryUploadSection = document.getElementById('galleryUploadSection');
+
+        // Check authentication status on page load
+        function checkAuthStatus() {
+            if (supabase.isAuthenticated()) {
+                showAdminControls();
+            }
+        }
+
+        function showAdminControls() {
+            // Show floating button
+            floatingAdminBtn.style.display = 'flex';
+            
+            // Hide gallery upload section from main page
+            galleryUploadSection.style.display = 'none';
+            
+            // Update user info in sidebar
+            const session = supabase.getSession();
+            if (session && session.user) {
+                userEmail.textContent = session.user.email || 'admin@example.com';
+                const initial = (session.user.email || 'A').charAt(0).toUpperCase();
+                userAvatar.textContent = initial;
+            }
+        }
+
+        function hideAdminControls() {
+            // Hide floating button
+            floatingAdminBtn.style.display = 'none';
+            
+            // Close sidebar if open
+            adminSidebar.classList.remove('open');
+            adminSidebarOverlay.classList.remove('show');
+            
+            // Reset gallery upload section
+            galleryUploadSection.style.display = 'block';
+        }
+
+        // Floating admin button - opens login or sidebar
+        floatingAdminBtn.addEventListener('click', () => {
+            if (supabase.isAuthenticated()) {
+                // Open admin sidebar
+                adminSidebar.classList.add('open');
+                adminSidebarOverlay.classList.add('show');
+            } else {
+                // Show login modal
+                loginModalOverlay.classList.add('show');
+            }
+        });
+
+        // Close login modal
+        loginModalClose.addEventListener('click', () => {
+            loginModalOverlay.classList.remove('show');
+        });
+
+        loginModalOverlay.addEventListener('click', (e) => {
+            if (e.target === loginModalOverlay) {
+                loginModalOverlay.classList.remove('show');
+            }
+        });
+
+        // Close admin sidebar
+        closeSidebar.addEventListener('click', () => {
+            adminSidebar.classList.remove('open');
+            adminSidebarOverlay.classList.remove('show');
+        });
+
+        adminSidebarOverlay.addEventListener('click', () => {
+            adminSidebar.classList.remove('open');
+            adminSidebarOverlay.classList.remove('show');
+        });
+
+        // Tab switching
+        document.querySelectorAll('.admin-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                const tabName = tab.getAttribute('data-tab');
+                document.getElementById(tabName + 'Tab').classList.add('active');
+            });
+        });
+
+        // Authentication form submit
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            authError.classList.add('hidden');
+
+            const email = document.getElementById('authEmail').value;
+            const password = document.getElementById('authPassword').value;
+
+            try {
+                await supabase.signIn(email, password);
+                showAdminControls();
+                authForm.reset();
+                
+                // Close login modal
+                loginModalOverlay.classList.remove('show');
+                
+                // Open admin sidebar
+                setTimeout(() => {
+                    adminSidebar.classList.add('open');
+                    adminSidebarOverlay.classList.add('show');
+                }, 300);
+            } catch (error) {
+                authError.textContent = error.message;
+                authError.classList.remove('hidden');
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', async () => {
+            if (confirm('Are you sure you want to sign out?')) {
+                await supabase.signOut();
+                hideAdminControls();
+                
+                // Close sidebar
+                adminSidebar.classList.remove('open');
+                adminSidebarOverlay.classList.remove('show');
+            }
+        });
+
+        // Initialize auth status
+        checkAuthStatus();
+
+        // ============================================
+        // SMOOTH SCROLLING
+        // ============================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ============================================
+        // BLOG RENDERING
+        // ============================================
+        function renderBlogGrid() {
+            const blogGrid = document.getElementById('blogGrid');
+            blogGrid.innerHTML = '';
+
+            const posts = dataStore.getAllBlogPosts();
+            
+            posts.forEach(post => {
+                const card = document.createElement('div');
+                card.className = 'blog-card';
+                card.setAttribute('data-blog-id', post.id);
+                card.innerHTML = `
+                    <div class="blog-card-header">
+                        <h3>${post.title}</h3>
+                        <p class="blog-meta">${post.date}</p>
+                    </div>
+                    <div class="blog-card-body">
+                        <p class="blog-excerpt">${post.excerpt}</p>
+                        <div class="blog-tags">
+                            ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+
+                card.addEventListener('click', () => openBlogModal(post));
+                blogGrid.appendChild(card);
+            });
+        }
+
+        function openBlogModal(post) {
+            const modal = document.getElementById('blogModal');
+            document.getElementById('modalTitle').textContent = post.title;
+            document.getElementById('modalMeta').textContent = post.date;
+            document.getElementById('modalBody').innerHTML = post.content;
+            
+            const tagsContainer = document.getElementById('modalTags');
+            tagsContainer.innerHTML = post.tags.map(tag => 
+                `<span class="tag">${tag}</span>`
+            ).join('');
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Blog functionality
+        const blogPosts = {
+            1: {
+                title: 'Understanding Brain-Computer Interfaces',
+                date: 'March 8, 2026',
+                tags: ['BCI', 'Neuroscience', 'Technology'],
+                content: `
+                    <p>Brain-Computer Interfaces (BCIs) represent one of the most exciting frontiers in neuroscience and technology. 
+                    As I work on my science fair project, I've been exploring how BCIs can be optimized to detect motor commands 
+                    with greater accuracy and reliability.</p>
+                    
+                    <h3 style="color: var(--color-accent); margin-top: 2rem; margin-bottom: 1rem;">What are BCIs?</h3>
+                    <p>A brain-computer interface is a direct communication pathway between the brain's electrical activity and an 
+                    external device. By detecting and interpreting neural signals, BCIs can enable people to control computers, 
+                    prosthetic limbs, or other devices using only their thoughts.</p>
+                    
+                    <h3 style="color: var(--color-accent); margin-top: 2rem; margin-bottom: 1rem;">My Research Focus</h3>
+                    <p>My project specifically looks at optimizing the detection of motor commands. This involves understanding 
+                    how the brain generates signals when we intend to move, and how we can translate those signals into reliable 
+                    commands for technological systems.</p>
+                    
+                    <p>Through this research, I'm learning about signal processing, machine learning algorithms, and the complex 
+                    interplay between biological and technological systems. It's challenging work, but incredibly rewarding.</p>
+                `
+            },
+            2: {
+                title: 'My Journey to UCSF Labs',
+                date: 'February 15, 2026',
+                tags: ['Experience', 'Research', 'UCSF'],
+                content: `
+                    <p>This summer, I had the incredible opportunity to visit the lab facilities at UCSF. Walking through those 
+                    labs and witnessing firsthand real scientists at work was a transformative experience that solidified my 
+                    commitment to pursuing research in neuroscience.</p>
+                    
+                    <h3 style="color: var(--color-accent); margin-top: 2rem; margin-bottom: 1rem;">The Impact</h3>
+                    <p>The researchers I met weren't just studying abstract concepts – they were using their knowledge to address 
+                    real medical questions and help real people. Seeing this connection between research and practical impact 
+                    showed me exactly what I want to do with my career.</p>
+                    
+                    <p>These people became role models for me. Their dedication, curiosity, and commitment to advancing scientific 
+                    knowledge inspired me to push further into research and work toward becoming part of that world.</p>
+                    
+                    <h3 style="color: var(--color-accent); margin-top: 2rem; margin-bottom: 1rem;">Key Takeaways</h3>
+                    <p>This experience taught me that research isn't just about what happens in the classroom or in textbooks. 
+                    It's about real-world applications, collaboration, and the pursuit of knowledge that can genuinely improve 
+                    people's lives. That's the path I want to follow.</p>
+                `
+            },
+            3: {
+                title: 'Physical AI: The Intelligence That Touches Steel',
+                date: 'March 1, 2026',
+                tags: ['AI', 'Technology', 'Innovation'],
+                content: `
+                    <p>AI has left the screen. It now bends metal, inspects welds, and rewires production lines—all before a 
+                    human clocks in. For a decade, AI meant chatbots and image generators, software talking to software. 
+                    That era is over.</p>
+                    
+                    <h3 style="color: var(--color-accent); margin-top: 2rem; margin-bottom: 1rem;">The Shift</h3>
+                    <p>In 2026, the most consequential AI story is happening on factory floors, inside robotic arms, and across 
+                    logistics networks. Traditional automation follows rigid rules—change the part or the lighting, and the whole 
+                    program needs rewriting. Physical AI breaks this through three capabilities:</p>
+                    
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li><strong>Perception:</strong> Deep learning processing camera, lidar, and sensor data simultaneously 
+                        to understand what "normal" looks like</li>
+                        <li><strong>Reasoning:</strong> LLMs enabling machines to interpret context and plan actions</li>
+                        <li><strong>Adaptation:</strong> Reinforcement learning allowing robots to improve through experience 
+                        in real time</li>
+                    </ul>
+                    
+                    <h3 style="color: var(--color-accent); margin-top: 2rem; margin-bottom: 1rem;">The Real Driver</h3>
+                    <p>The underlying force isn't technology—it's a projected 2.1 million unfilled U.S. manufacturing jobs by 2030. 
+                    Physical AI isn't replacing workers; it's filling roles that can't be staffed.</p>
+                    
+                    <p>The factories that treat AI as an engineering discipline—with clear use cases, measurable outcomes, and 
+                    iterative deployment—will be the ones still standing in 2030.</p>
+                `
+            }
+        };
+
+        // Blog modal functionality
+        const modal = document.getElementById('blogModal');
+        const closeModal = document.getElementById('closeModal');
+
+        document.querySelectorAll('.blog-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const blogId = this.getAttribute('data-blog-id');
+                const post = blogPosts[blogId];
+                
+                if (post) {
+                    document.getElementById('modalTitle').textContent = post.title;
+                    document.getElementById('modalMeta').textContent = post.date;
+                    document.getElementById('modalBody').innerHTML = post.content;
+                    
+                    const tagsContainer = document.getElementById('modalTags');
+                    tagsContainer.innerHTML = post.tags.map(tag => 
+                        `<span class="tag">${tag}</span>`
+                    ).join('');
+                    
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        closeModal.onclick = function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        };
+
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        };
+
+        // ============================================
+        // BLOG FUNCTIONALITY
+        // ============================================
+        let nextBlogId = 4; // Starting from 4 since we have 3 sample posts
+        let editingBlogId = null;
+
+        // Show/hide blog form
+        const blogListView = document.getElementById('blogListView');
+        const blogForm = document.getElementById('blogForm');
+        const createNewPostBtn = document.getElementById('createNewPostBtn');
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+        const formTitle = document.getElementById('formTitle');
+        const submitBlogBtn = document.getElementById('submitBlogBtn');
+
+        function showBlogList() {
+            blogListView.style.display = 'block';
+            blogForm.style.display = 'none';
+            renderAdminBlogList();
+        }
+
+        function showBlogForm(isEditing = false, blogId = null) {
+            blogListView.style.display = 'none';
+            blogForm.style.display = 'block';
+            
+            if (isEditing && blogId) {
+                editingBlogId = blogId;
+                formTitle.textContent = 'Edit Post';
+                submitBlogBtn.textContent = 'Update';
+                
+                // Load blog data
+                const post = blogPosts[blogId];
+                if (post) {
+                    document.getElementById('blogTitle').value = post.title;
+                    document.getElementById('blogExcerpt').value = post.excerpt || '';
+                    document.getElementById('blogTags').value = post.tags.join(', ');
+                    document.getElementById('blogContent').value = post.content.replace(/<br>/g, '\n');
+                    document.getElementById('editingBlogId').value = blogId;
+                }
+            } else {
+                editingBlogId = null;
+                formTitle.textContent = 'Create New Post';
+                submitBlogBtn.textContent = 'Publish';
+                blogForm.reset();
+                document.getElementById('editingBlogId').value = '';
+            }
+        }
+
+        createNewPostBtn.addEventListener('click', () => showBlogForm(false));
+        cancelEditBtn.addEventListener('click', () => showBlogList());
+
+        // Render admin blog list
+        function renderAdminBlogList() {
+            const adminBlogList = document.getElementById('adminBlogList');
+            adminBlogList.innerHTML = '';
+            
+            const posts = Object.entries(blogPosts).reverse(); // Newest first
+            
+            posts.forEach(([id, post]) => {
+                const item = document.createElement('div');
+                item.style.cssText = `
+                    background-color: var(--color-bg-secondary);
+                    padding: var(--spacing-md);
+                    border-radius: var(--radius-sm);
+                    border: 1px solid var(--color-border);
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                `;
+                
+                item.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div style="flex: 1;">
+                            <h5 style="color: var(--color-text-primary); margin-bottom: 0.25rem; font-size: 1rem;">${post.title}</h5>
+                            <p style="color: var(--color-text-muted); font-size: 0.85rem; margin: 0;">${post.date}</p>
+                        </div>
+                        <button class="edit-blog-btn" data-blog-id="${id}" style="
+                            background-color: var(--color-accent);
+                            color: var(--color-bg-primary);
+                            border: none;
+                            padding: 0.5rem 1rem;
+                            border-radius: var(--radius-sm);
+                            cursor: pointer;
+                            font-size: 0.85rem;
+                            font-weight: 600;
+                        ">Edit</button>
+                    </div>
+                `;
+                
+                item.querySelector('.edit-blog-btn').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    showBlogForm(true, id);
+                });
+                
+                adminBlogList.appendChild(item);
+            });
+        }
+
+        // DOCX Upload Handler
+        const docxUpload = document.getElementById('docxUpload');
+        
+        docxUpload.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            try {
+                // Load mammoth.js library dynamically
+                if (!window.mammoth) {
+                    const script = document.createElement('script');
+                    script.src = 'https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js';
+                    document.head.appendChild(script);
+                    await new Promise(resolve => script.onload = resolve);
+                }
+                
+                const reader = new FileReader();
+                reader.onload = async (event) => {
+                    try {
+                        const arrayBuffer = event.target.result;
+                        const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
+                        const html = result.value;
+                        
+                        // Extract title (first heading or first paragraph)
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = html;
+                        
+                        const firstHeading = tempDiv.querySelector('h1, h2, h3');
+                        const title = firstHeading ? firstHeading.textContent : file.name.replace('.docx', '');
+                        
+                        // Remove title from content if it was extracted
+                        if (firstHeading) {
+                            firstHeading.remove();
+                        }
+                        
+                        // Get cleaned content
+                        const content = tempDiv.innerHTML;
+                        
+                        // Create excerpt
+                        const textContent = tempDiv.textContent || tempDiv.innerText || '';
+                        const excerpt = textContent.substring(0, 180).replace(/\s+/g, ' ').trim() + '...';
+                        
+                        // Fill form
+                        document.getElementById('blogTitle').value = title;
+                        document.getElementById('blogExcerpt').value = excerpt;
+                        document.getElementById('blogContent').value = content;
+                        
+                        alert('✅ Document imported successfully! Review and publish when ready.');
+                    } catch (error) {
+                        console.error('Error processing document:', error);
+                        alert('❌ Error processing document. Please try again or enter content manually.');
+                    }
+                };
+                reader.readAsArrayBuffer(file);
+            } catch (error) {
+                console.error('Error loading document:', error);
+                alert('❌ Error loading document processor. Please check your connection and try again.');
+            }
+            
+            // Reset file input
+            docxUpload.value = '';
+        });
+
+        // Blog form submission
+        document.getElementById('blogForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!supabase.isAuthenticated()) {
+                alert('Please sign in to publish posts');
+                return;
+            }
+            
+            const title = document.getElementById('sidebarBlogTitle').value;
+            const tags = document.getElementById('sidebarBlogTags').value.split(',').map(tag => tag.trim()).filter(tag => tag);
+            const content = document.getElementById('sidebarBlogContent').value;
+            const excerptInput = document.getElementById('sidebarBlogExcerpt').value;
+            
+            const date = new Date().toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+
+            // Use provided excerpt or create from content
+            let excerpt;
+            if (excerptInput && excerptInput.trim()) {
+                excerpt = excerptInput.trim();
+            } else {
+                // Strip HTML tags for excerpt
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = content;
+                const textContent = tempDiv.textContent || tempDiv.innerText || '';
+                excerpt = textContent.substring(0, 180).replace(/\s+/g, ' ').trim() + '...';
+            }
+
+            // Store the full content in blogPosts object
+            const blogId = nextBlogId++;
+            blogPosts[blogId] = {
+                title: title,
+                date: date,
+                tags: tags,
+                content: content.replace(/\n/g, '<br>')
+            };
+            
+            // Update or create blog card in main grid
+            const blogGrid = document.getElementById('blogGrid');
+            let existingCard = blogGrid.querySelector(`[data-blog-id="${blogId}"]`);
+            
+            if (existingCard) {
+                // Update existing card
+                existingCard.querySelector('.blog-card-header h3').textContent = title;
+                existingCard.querySelector('.blog-meta').textContent = date;
+                existingCard.querySelector('.blog-excerpt').textContent = excerpt;
+                existingCard.querySelector('.blog-tags').innerHTML = tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+            } else {
+                // Create new card
+                const newBlogCard = document.createElement('div');
+                newBlogCard.className = 'blog-card';
+                newBlogCard.setAttribute('data-blog-id', blogId);
+                newBlogCard.innerHTML = `
+                    <div class="blog-card-header">
+                        <h3>${title}</h3>
+                        <p class="blog-meta">${date}</p>
+                    </div>
+                    <div class="blog-card-body">
+                        <p class="blog-excerpt">${excerpt}</p>
+                        <div class="blog-tags">
+                            ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+
+                // Add click handler
+                newBlogCard.addEventListener('click', function() {
+                    const id = this.getAttribute('data-blog-id');
+                    const post = blogPosts[id];
+                    
+                    if (post) {
+                        document.getElementById('modalTitle').textContent = post.title;
+                        document.getElementById('modalMeta').textContent = post.date;
+                        document.getElementById('modalBody').innerHTML = post.content;
+                        
+                        const tagsContainer = document.getElementById('modalTags');
+                        tagsContainer.innerHTML = post.tags.map(tag => 
+                            `<span class="tag">${tag}</span>`
+                        ).join('');
+                        
+                        modal.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+                
+                blogGrid.insertBefore(newBlogCard, blogGrid.firstChild);
+            }
+            
+            // Reset form and return to list
+            this.reset();
+            showBlogList();
+            
+            // Show success message
+            const message = editingId ? 'Blog post updated successfully!' : 'Blog post published successfully!';
+            alert(`✅ ${message}`);
+            
+            // Scroll to blog section if it was a new post
+            if (!editingId) {
+                const blogSection = document.getElementById('blog');
+                blogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+        
+        // Initialize blog list view
+        showBlogList();
+
+        // Add highlight animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes highlightCard {
+                0%, 100% { box-shadow: none; }
+                50% { box-shadow: 0 0 0 3px var(--color-accent); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // ============================================
+        // GALLERY FUNCTIONALITY
+        // ============================================
+        const galleryImageUpload = document.getElementById('galleryImageUpload');
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+        const imageCaptionInput = document.getElementById('imageCaption');
+        const captionGroup = document.getElementById('captionGroup');
+        const uploadImagesBtn = document.getElementById('uploadImagesBtn');
+        const galleryGrid = document.getElementById('galleryGrid');
+        let selectedFiles = [];
+
+        galleryImageUpload.addEventListener('change', (e) => {
+            handleGalleryFiles(e.target.files);
+        });
+
+        function handleGalleryFiles(files) {
+            selectedFiles = Array.from(files).filter(file => file.type.startsWith('image/'));
+            
+            if (selectedFiles.length === 0) return;
+            
+            // Show preview and caption input
+            imagePreviewContainer.innerHTML = '';
+            captionGroup.style.display = 'block';
+            uploadImagesBtn.style.display = 'block';
+            
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const previewItem = document.createElement('div');
+                    previewItem.className = 'image-preview';
+                    previewItem.innerHTML = `
+                        <img src="${e.target.result}" alt="Preview ${index + 1}">
+                        <button class="remove-image" data-index="${index}">×</button>
+                    `;
+                    imagePreviewContainer.appendChild(previewItem);
+                    
+                    // Add remove functionality
+                    previewItem.querySelector('.remove-image').addEventListener('click', () => {
+                        selectedFiles.splice(index, 1);
+                        handleGalleryFiles(selectedFiles);
+                    });
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        uploadImagesBtn.addEventListener('click', () => {
+            if (selectedFiles.length === 0) return;
+            
+            const caption = imageCaptionInput.value.trim() || 'Untitled';
+            const date = new Date().toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long' 
+            });
+            
+            selectedFiles.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.innerHTML = `
+                        <img src="${e.target.result}" alt="${caption}">
+                        <div class="gallery-overlay">
+                            <p class="gallery-caption">${caption} - ${date}</p>
+                        </div>
+                    `;
+                    galleryGrid.insertBefore(galleryItem, galleryGrid.firstChild);
+                };
+                reader.readAsDataURL(file);
+            });
+            
+            // Reset
+            selectedFiles = [];
+            imagePreviewContainer.innerHTML = '';
+            imageCaptionInput.value = '';
+            captionGroup.style.display = 'none';
+            uploadImagesBtn.style.display = 'none';
+            galleryImageUpload.value = '';
+            
+            // Show success message
+            alert(`✅ ${selectedFiles.length > 1 ? selectedFiles.length + ' images' : 'Image'} uploaded successfully!`);
+        });
+    </script>
+</body>
+</html>
