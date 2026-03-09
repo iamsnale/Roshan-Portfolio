@@ -373,7 +373,7 @@
             font-size: 1.2rem;
         }
 
-        /* Floating Admin Button */
+        /* Floating Admin Button - Only visible when authenticated */
         .floating-admin-btn {
             position: fixed;
             bottom: 2rem;
@@ -382,7 +382,7 @@
             height: 56px;
             background-color: var(--color-accent);
             border-radius: 50%;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             cursor: pointer;
@@ -390,6 +390,20 @@
             transition: all 0.3s ease;
             z-index: 1500;
             border: none;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .floating-admin-btn.show {
+            display: flex;
+            animation: fadeInScale 0.4s ease forwards;
+        }
+
+        @keyframes fadeInScale {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .floating-admin-btn:hover {
@@ -403,83 +417,7 @@
             fill: var(--color-bg-primary);
         }
 
-        /* Login Overlay - Vidhai Style */
-        .login-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 3000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .login-overlay.show {
-            display: flex;
-            opacity: 1;
-        }
-
-        .login-box {
-            background-color: var(--color-bg-card);
-            padding: var(--spacing-2xl);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--color-border);
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-
-        .login-overlay.show .login-box {
-            transform: scale(1);
-        }
-
-        .login-box h2 {
-            color: var(--color-text-primary);
-            text-align: center;
-            margin-bottom: var(--spacing-sm);
-            font-size: 1.75rem;
-            font-weight: 700;
-        }
-
-        .login-box p {
-            text-align: center;
-            color: var(--color-text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .login-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            color: var(--color-text-secondary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-sm);
-            transition: all 0.2s ease;
-        }
-
-        .login-close:hover {
-            background-color: var(--color-bg-hover);
-            color: var(--color-text-primary);
-        }
-
-        /* Login Modal Overlay */
+        /* Login Modal Overlay - Vidhai Style */
         .login-modal-overlay {
             display: none;
             position: fixed;
@@ -487,15 +425,18 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            z-index: 2500;
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
             justify-content: center;
             align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .login-modal-overlay.show {
             display: flex;
+            opacity: 1;
         }
 
         .login-modal {
@@ -505,20 +446,14 @@
             width: 90%;
             max-width: 420px;
             border: 1px solid var(--color-border);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
             position: relative;
-            animation: modalSlideIn 0.3s ease;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
         }
 
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .login-modal-overlay.show .login-modal {
+            transform: scale(1);
         }
 
         .login-modal-close {
@@ -588,11 +523,15 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
             z-index: 1999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .admin-sidebar-overlay.show {
             display: block;
+            opacity: 1;
         }
 
         .admin-sidebar-header {
@@ -1442,7 +1381,7 @@
             </div>
             <div class="about-content">
                 <p class="about-intro">
-                    I'm a high school student at Mountain House High School driven by an insatiable curiosity about 
+                    I'm a high school student at Tracy High School driven by an insatiable curiosity about 
                     the human brain and its potential intersection with technology. My journey into neuroscience 
                     began not in a classroom, but from a simple question: what makes us who we are?
                 </p>
@@ -1791,7 +1730,38 @@
 
             <!-- Blog Tab Content -->
             <div class="tab-content active" id="blogTab">
-                <form id="blogForm">
+                <div id="blogListView">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+                        <h4 style="color: var(--color-text-primary); margin: 0;">Manage Posts</h4>
+                        <button id="createNewPostBtn" class="btn btn-primary" style="padding: 0.5rem 1rem;">+ New Post</button>
+                    </div>
+                    <div id="adminBlogList" style="display: flex; flex-direction: column; gap: var(--spacing-sm);">
+                        <!-- Blog posts will be listed here -->
+                    </div>
+                </div>
+                
+                <form id="blogForm" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+                        <h4 style="color: var(--color-text-primary); margin: 0;" id="formTitle">Create New Post</h4>
+                        <button type="button" id="cancelEditBtn" class="btn btn-secondary" style="padding: 0.5rem 1rem;">← Back</button>
+                    </div>
+                    
+                    <input type="hidden" id="editingBlogId">
+                    
+                    <div class="form-group">
+                        <label>Import from Word Document</label>
+                        <div class="upload-btn-wrapper">
+                            <div class="upload-btn">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.25rem;">📄</div>
+                                <p style="margin: 0; font-size: 0.85rem;">Upload .docx file</p>
+                            </div>
+                            <input type="file" id="docxUpload" accept=".docx">
+                        </div>
+                        <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.5rem;">
+                            Or fill in the fields manually below
+                        </p>
+                    </div>
+                    
                     <div class="form-group">
                         <label for="blogTitle">Title</label>
                         <input type="text" id="blogTitle" placeholder="Enter blog post title" required>
@@ -1809,7 +1779,7 @@
                         <textarea id="blogContent" placeholder="Write your content... Supports HTML tags" required style="min-height: 250px;"></textarea>
                     </div>
                     <div style="display: flex; gap: var(--spacing-sm);">
-                        <button type="submit" class="btn btn-primary" style="flex: 1;">Publish</button>
+                        <button type="submit" class="btn btn-primary" style="flex: 1;" id="submitBlogBtn">Publish</button>
                         <button type="button" id="previewBtn" class="btn btn-secondary">Preview</button>
                     </div>
                 </form>
@@ -1876,32 +1846,25 @@
             }
 
             async signIn(email, password) {
-    const response = await fetch(`${this.url}/auth/v1/token?grant_type=password`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'apikey': this.key,
-            'Authorization': `Bearer ${this.key}`
-        },
-        body: JSON.stringify({
-            email,
-            password
-        })
-    });
+                const response = await fetch(`${this.url}/auth/v1/token?grant_type=password`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': this.key
+                    },
+                    body: JSON.stringify({ email, password })
+                });
 
-    const data = await response.json();
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.msg || 'Authentication failed');
+                }
 
-    if (!response.ok) {
-        // Supabase sometimes returns 'error_description' instead of 'msg'
-        const message = data.msg || data.error_description || data.error || 'Authentication failed';
-        throw new Error(message);
-    }
-
-    this.session = data;
-    localStorage.setItem('supabase_session', JSON.stringify(data));
-    return data;
-}
-
+                const data = await response.json();
+                this.session = data;
+                localStorage.setItem('supabase_session', JSON.stringify(data));
+                return data;
+            }
 
             async signOut() {
                 this.session = null;
@@ -2284,6 +2247,160 @@
         // BLOG FUNCTIONALITY
         // ============================================
         let nextBlogId = 4; // Starting from 4 since we have 3 sample posts
+        let editingBlogId = null;
+
+        // Show/hide blog form
+        const blogListView = document.getElementById('blogListView');
+        const blogForm = document.getElementById('blogForm');
+        const createNewPostBtn = document.getElementById('createNewPostBtn');
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+        const formTitle = document.getElementById('formTitle');
+        const submitBlogBtn = document.getElementById('submitBlogBtn');
+
+        function showBlogList() {
+            blogListView.style.display = 'block';
+            blogForm.style.display = 'none';
+            renderAdminBlogList();
+        }
+
+        function showBlogForm(isEditing = false, blogId = null) {
+            blogListView.style.display = 'none';
+            blogForm.style.display = 'block';
+            
+            if (isEditing && blogId) {
+                editingBlogId = blogId;
+                formTitle.textContent = 'Edit Post';
+                submitBlogBtn.textContent = 'Update';
+                
+                // Load blog data
+                const post = blogPosts[blogId];
+                if (post) {
+                    document.getElementById('blogTitle').value = post.title;
+                    document.getElementById('blogExcerpt').value = post.excerpt || '';
+                    document.getElementById('blogTags').value = post.tags.join(', ');
+                    document.getElementById('blogContent').value = post.content.replace(/<br>/g, '\n');
+                    document.getElementById('editingBlogId').value = blogId;
+                }
+            } else {
+                editingBlogId = null;
+                formTitle.textContent = 'Create New Post';
+                submitBlogBtn.textContent = 'Publish';
+                blogForm.reset();
+                document.getElementById('editingBlogId').value = '';
+            }
+        }
+
+        createNewPostBtn.addEventListener('click', () => showBlogForm(false));
+        cancelEditBtn.addEventListener('click', () => showBlogList());
+
+        // Render admin blog list
+        function renderAdminBlogList() {
+            const adminBlogList = document.getElementById('adminBlogList');
+            adminBlogList.innerHTML = '';
+            
+            const posts = Object.entries(blogPosts).reverse(); // Newest first
+            
+            posts.forEach(([id, post]) => {
+                const item = document.createElement('div');
+                item.style.cssText = `
+                    background-color: var(--color-bg-secondary);
+                    padding: var(--spacing-md);
+                    border-radius: var(--radius-sm);
+                    border: 1px solid var(--color-border);
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                `;
+                
+                item.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div style="flex: 1;">
+                            <h5 style="color: var(--color-text-primary); margin-bottom: 0.25rem; font-size: 1rem;">${post.title}</h5>
+                            <p style="color: var(--color-text-muted); font-size: 0.85rem; margin: 0;">${post.date}</p>
+                        </div>
+                        <button class="edit-blog-btn" data-blog-id="${id}" style="
+                            background-color: var(--color-accent);
+                            color: var(--color-bg-primary);
+                            border: none;
+                            padding: 0.5rem 1rem;
+                            border-radius: var(--radius-sm);
+                            cursor: pointer;
+                            font-size: 0.85rem;
+                            font-weight: 600;
+                        ">Edit</button>
+                    </div>
+                `;
+                
+                item.querySelector('.edit-blog-btn').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    showBlogForm(true, id);
+                });
+                
+                adminBlogList.appendChild(item);
+            });
+        }
+
+        // DOCX Upload Handler
+        const docxUpload = document.getElementById('docxUpload');
+        
+        docxUpload.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            try {
+                // Load mammoth.js library dynamically
+                if (!window.mammoth) {
+                    const script = document.createElement('script');
+                    script.src = 'https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js';
+                    document.head.appendChild(script);
+                    await new Promise(resolve => script.onload = resolve);
+                }
+                
+                const reader = new FileReader();
+                reader.onload = async (event) => {
+                    try {
+                        const arrayBuffer = event.target.result;
+                        const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
+                        const html = result.value;
+                        
+                        // Extract title (first heading or first paragraph)
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = html;
+                        
+                        const firstHeading = tempDiv.querySelector('h1, h2, h3');
+                        const title = firstHeading ? firstHeading.textContent : file.name.replace('.docx', '');
+                        
+                        // Remove title from content if it was extracted
+                        if (firstHeading) {
+                            firstHeading.remove();
+                        }
+                        
+                        // Get cleaned content
+                        const content = tempDiv.innerHTML;
+                        
+                        // Create excerpt
+                        const textContent = tempDiv.textContent || tempDiv.innerText || '';
+                        const excerpt = textContent.substring(0, 180).replace(/\s+/g, ' ').trim() + '...';
+                        
+                        // Fill form
+                        document.getElementById('blogTitle').value = title;
+                        document.getElementById('blogExcerpt').value = excerpt;
+                        document.getElementById('blogContent').value = content;
+                        
+                        alert('✅ Document imported successfully! Review and publish when ready.');
+                    } catch (error) {
+                        console.error('Error processing document:', error);
+                        alert('❌ Error processing document. Please try again or enter content manually.');
+                    }
+                };
+                reader.readAsArrayBuffer(file);
+            } catch (error) {
+                console.error('Error loading document:', error);
+                alert('❌ Error loading document processor. Please check your connection and try again.');
+            }
+            
+            // Reset file input
+            docxUpload.value = '';
+        });
 
         // Preview functionality
         document.getElementById('previewBtn').addEventListener('click', function() {
@@ -2297,7 +2414,7 @@
             });
 
             document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalMeta').innerHTML = `<span>📅</span><span>${date}</span>`;
+            document.getElementById('modalMeta').textContent = date;
             document.getElementById('modalBody').innerHTML = content;
             
             const tagsContainer = document.getElementById('modalTags');
@@ -2309,6 +2426,7 @@
             document.body.style.overflow = 'hidden';
         });
 
+        // Blog form submission
         document.getElementById('blogForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -2317,6 +2435,7 @@
                 return;
             }
             
+            const editingId = document.getElementById('editingBlogId').value;
             const title = document.getElementById('blogTitle').value;
             const tags = document.getElementById('blogTags').value.split(',').map(tag => tag.trim()).filter(tag => tag);
             const content = document.getElementById('blogContent').value;
@@ -2340,69 +2459,98 @@
                 excerpt = textContent.substring(0, 180).replace(/\s+/g, ' ').trim() + '...';
             }
 
-            // Store the full content in blogPosts object
-            const blogId = nextBlogId++;
-            blogPosts[blogId] = {
-                title: title,
-                date: date,
-                tags: tags,
-                content: content.replace(/\n/g, '<br>')
-            };
+            // Store or update the blog post
+            let blogId;
+            if (editingId && blogPosts[editingId]) {
+                // Update existing post
+                blogId = editingId;
+                blogPosts[blogId] = {
+                    title: title,
+                    date: blogPosts[blogId].date, // Keep original date
+                    tags: tags,
+                    content: content,
+                    excerpt: excerpt
+                };
+            } else {
+                // Create new post
+                blogId = nextBlogId++;
+                blogPosts[blogId] = {
+                    title: title,
+                    date: date,
+                    tags: tags,
+                    content: content,
+                    excerpt: excerpt
+                };
+            }
             
-            const newBlogCard = document.createElement('div');
-            newBlogCard.className = 'blog-card';
-            newBlogCard.setAttribute('data-blog-id', blogId);
-            newBlogCard.innerHTML = `
-                <div class="blog-card-header">
-                    <h3>${title}</h3>
-                    <p class="blog-meta">
-                        <span>📅</span>
-                        <span>${date}</span>
-                    </p>
-                </div>
-                <div class="blog-card-body">
-                    <p class="blog-excerpt">${excerpt}</p>
-                    <div class="blog-tags">
-                        ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            // Update or create blog card in main grid
+            const blogGrid = document.getElementById('blogGrid');
+            let existingCard = blogGrid.querySelector(`[data-blog-id="${blogId}"]`);
+            
+            if (existingCard) {
+                // Update existing card
+                existingCard.querySelector('.blog-card-header h3').textContent = title;
+                existingCard.querySelector('.blog-meta').textContent = blogPosts[blogId].date;
+                existingCard.querySelector('.blog-excerpt').textContent = excerpt;
+                existingCard.querySelector('.blog-tags').innerHTML = tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+            } else {
+                // Create new card
+                const newBlogCard = document.createElement('div');
+                newBlogCard.className = 'blog-card';
+                newBlogCard.setAttribute('data-blog-id', blogId);
+                newBlogCard.innerHTML = `
+                    <div class="blog-card-header">
+                        <h3>${title}</h3>
+                        <p class="blog-meta">${date}</p>
                     </div>
-                </div>
-            `;
+                    <div class="blog-card-body">
+                        <p class="blog-excerpt">${excerpt}</p>
+                        <div class="blog-tags">
+                            ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
 
-            // Add click handler
-            newBlogCard.addEventListener('click', function() {
-                const id = this.getAttribute('data-blog-id');
-                const post = blogPosts[id];
+                // Add click handler
+                newBlogCard.addEventListener('click', function() {
+                    const id = this.getAttribute('data-blog-id');
+                    const post = blogPosts[id];
+                    
+                    if (post) {
+                        document.getElementById('modalTitle').textContent = post.title;
+                        document.getElementById('modalMeta').textContent = post.date;
+                        document.getElementById('modalBody').innerHTML = post.content;
+                        
+                        const tagsContainer = document.getElementById('modalTags');
+                        tagsContainer.innerHTML = post.tags.map(tag => 
+                            `<span class="tag">${tag}</span>`
+                        ).join('');
+                        
+                        modal.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
                 
-                if (post) {
-                    document.getElementById('modalTitle').textContent = post.title;
-                    document.getElementById('modalMeta').innerHTML = `<span>📅</span><span>${post.date}</span>`;
-                    document.getElementById('modalBody').innerHTML = post.content;
-                    
-                    const tagsContainer = document.getElementById('modalTags');
-                    tagsContainer.innerHTML = post.tags.map(tag => 
-                        `<span class="tag">${tag}</span>`
-                    ).join('');
-                    
-                    modal.style.display = 'block';
-                    document.body.style.overflow = 'hidden';
-                }
-            });
+                blogGrid.insertBefore(newBlogCard, blogGrid.firstChild);
+            }
             
-            document.getElementById('blogGrid').insertBefore(
-                newBlogCard, 
-                document.getElementById('blogGrid').firstChild
-            );
-            
+            // Reset form and return to list
             this.reset();
+            showBlogList();
             
-            // Smooth scroll to the new post
-            setTimeout(() => {
-                newBlogCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                newBlogCard.style.animation = 'highlightCard 2s ease';
-            }, 100);
+            // Show success message
+            const message = editingId ? 'Blog post updated successfully!' : 'Blog post published successfully!';
+            alert(`✅ ${message}`);
             
-            alert('✅ Blog post published successfully!');
+            // Scroll to blog section if it was a new post
+            if (!editingId) {
+                const blogSection = document.getElementById('blog');
+                blogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         });
+        
+        // Initialize blog list view
+        showBlogList();
 
         // Add highlight animation
         const style = document.createElement('style');
