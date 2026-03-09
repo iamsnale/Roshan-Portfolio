@@ -1977,7 +1977,8 @@
         // Floating admin button - opens login or sidebar
         floatingAdminBtn.addEventListener('click', () => {
             if (supabase.isAuthenticated()) {
-                // Open admin sidebar
+                // Open admin sidebar in list view (not form view)
+                showBlogList(); // Make sure we're in list view
                 adminSidebar.classList.add('open');
                 adminSidebarOverlay.classList.add('show');
             } else {
@@ -2260,6 +2261,8 @@
         function showBlogList() {
             blogListView.style.display = 'block';
             blogForm.style.display = 'none';
+            editingBlogId = null; // Clear any editing state
+            blogForm.reset(); // Reset form
             renderAdminBlogList();
         }
 
